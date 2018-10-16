@@ -9,6 +9,7 @@ list(APPEND DIRS
     "./src/GameSpy/gstats"
     "./src/GameSpy/gt2"
     "./src/GameSpy/natneg"
+    "./src/GameSpy/pt"
     "./src/GameSpy/qr2"
     "./src/GameSpy/sake"
     "./src/GameSpy/sc"
