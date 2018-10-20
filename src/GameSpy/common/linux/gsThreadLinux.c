@@ -18,22 +18,17 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-// These functions are unsupported in the current version of the SDK
 
 gsi_u32 gsiInterlockedIncrement(gsi_u32 * value)
 {
-	GS_ASSERT_STR(gsi_false, "gsiInterlockIncrement is unsupported for LINUX in the current version of the SDK\n");
-	return 1;
+	return __sync_add_and_fetch(value, 1);
 }
 
 gsi_u32 gsiInterlockedDecrement(gsi_u32 * value)
 {
-	GS_ASSERT_STR(gsi_false, "gsiInterlockIncrement is unsupported for LINUX in the current version of the SDK\n");
-	return 1;
+	return __sync_fetch_and_add(value, -1);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 int gsiStartThread(GSThreadFunc func, gsi_u32 theStackSize, void *arg, GSIThreadID * id)
 {
 	pthread_attr_init(&id->attr);
