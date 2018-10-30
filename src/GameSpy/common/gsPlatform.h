@@ -35,7 +35,9 @@
 #endif
 
 #if defined(_LINUX) || defined(_MACOSX)
-	#define _UNIX
+	#ifndef _UNIX
+		#define _UNIX
+	#endif
 #endif
 
 #if defined(_XBOX) || defined (_X360)
