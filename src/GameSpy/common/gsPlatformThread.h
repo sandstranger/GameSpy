@@ -6,6 +6,9 @@
 
 #include "gsPlatform.h"
 
+#if defined(_UNIX) //_LINUX || _MACOSX
+#include <pthread.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
