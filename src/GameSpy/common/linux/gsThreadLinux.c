@@ -48,12 +48,15 @@ void gsiCancelThread(GSIThreadID id)
 {
 	//should i destroy the attributes here?
 	pthread_attr_destroy(&id.attr);
-
-	if (pthread_cancel(id.thread) != PTHREAD_NO_ERROR) {
-		//there was an error - how should we handle these? or should we?
-		gsDebugFormat(GSIDebugCat_Common, GSIDebugType_Misc, GSIDebugLevel_WarmError,
-			"Failed to cancel thread\r\n");
-	}
+#ifdef ANDROID
+	if (pthread_kill(id.thread,0) != PTHREAD_NO_ERROR) {
+#else
+        if (pthread_cancel(id.thread) != PTHREAD_NO_ERROR) {
+#endif
+            //there was an error - how should we handle these? or should we?
+            gsDebugFormat(GSIDebugCat_Common, GSIDebugType_Misc, GSIDebugLevel_WarmError,
+                          "Failed to cancel thread\r\n");
+    }
 	//free up memory and set to NULL
 
 	gsifree(&id.thread);
